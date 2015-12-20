@@ -11,3 +11,4 @@ not guaranteed.
 ## Homework Assignments
 
 1. hello-world
+2. prime-numbers
