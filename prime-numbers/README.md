@@ -11,7 +11,8 @@ The default build target creates an executable named `prime-numbers`.
 
 The `prime-numbers` program takes two command-line arguments: the number of
 primes to generate, and the number of threads to use. Both arguments must be
-non-negative integers.
+non-negative integers. For more complete instructions, run `prime-numbers`
+without any arguments.
 
 An example invocation that outputs 1000 primes and runs two tasks in
 parallel:

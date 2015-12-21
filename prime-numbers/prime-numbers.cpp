@@ -111,9 +111,9 @@ exit:
 template<class CharT, class Traits>
 void show_usage(std::basic_ostream<CharT, Traits>& out) {
 	out << "Usage: " << PACKAGE_NAME << " <number of primes> <number of threads>\n"
-	    << "Writes the first <number of primes> prime numbers to standard output using an\n"
+	    << "Write the first <number of primes> prime numbers to standard output using an\n"
 	    << "algorithm that executes <number of threads> tasks in parallel.\n\n"
-	    << "If the specified <number of threads> is 0, the program uses " << CPU_COUNT << " by default.\n"
+	    << "If the specified number of threads is 0, the program uses " << CPU_COUNT << " by default.\n"
 	    << "Prime numbers are separated by newlines."
 	    << std::endl;
 }
