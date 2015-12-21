@@ -81,11 +81,14 @@ int main(int argc, char* argv[]) {
 	// number, where n is prime_count.
 	const std::uintmax_t max_prime = prime_count < 6 ? 12 : prime_count * (std::log(prime_count) + std::log(std::log(prime_count)));
 
+	// Divide the set of integers in [0, max_prime) into chunks/ranges, one
+	// for each thread.
 	const auto range_div = std::div(max_prime, thread_count);
 
 	std::vector<std::uintmax_t> range_offsets(thread_count);
 	std::vector<std::future<std::vector<bool>>> prime_table_futures(thread_count);
 
+	// Perform primality tests on each range of integers.
 	for (std::size_t i = 0; i < thread_count; i++) {
 		const std::size_t range_size = range_div.quot + (i == 0 ? range_div.rem : 0);
 		const std::uintmax_t range_offset = i * range_size + (i > 0 ? range_div.rem : 0);
@@ -93,6 +96,7 @@ int main(int argc, char* argv[]) {
 		prime_table_futures[i] = std::async(std::launch::async, test_primes_in_range, range_offset, range_size);
 	}
 
+	// Write the list of prime numbers to standard output.
 	for (std::size_t i = 0; i < thread_count; i++) {
 		const std::vector<bool> prime_table = prime_table_futures[i].get();
 		for (std::size_t j = 0; j < prime_table.size(); j++) {
@@ -118,6 +122,7 @@ void show_usage(std::basic_ostream<CharT, Traits>& out) {
 	    << std::endl;
 }
 
+// Generates random integers in a thread-safe manner.
 template<class IntType>
 IntType random_int(IntType min, IntType max) {
 	static thread_local std::default_random_engine generator(std::random_device{}());
@@ -125,7 +130,7 @@ IntType random_int(IntType min, IntType max) {
 	return uniform_dist(generator);
 }
 
-// Precondition: n != 0
+// Precondition: n != 0.
 std::uintmax_t mod_pow(std::uintmax_t x, std::uintmax_t y, std::uintmax_t n) {
 	if (y == 0)
 		return 1;
@@ -135,6 +140,9 @@ std::uintmax_t mod_pow(std::uintmax_t x, std::uintmax_t y, std::uintmax_t n) {
 	return x * z * z % n;
 }
 
+// NOTE: Implemented using Fermat's little theorem. The probability of the
+// primality test returning a false positive is 1 / 2^k, where
+// k = PRIMALITY_TEST_COUNT.
 bool is_prime(std::uintmax_t n) {
 	if (n < 2)
 		return false;

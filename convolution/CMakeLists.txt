@@ -8,9 +8,9 @@ include(CheckTypeSize)
 project(convolution VERSION 1.0 LANGUAGES CXX)
 
 # Set variables.
-set(PACKAGE_NAME "${PROJECT_NAME}")
-set(PACKAGE_TARNAME "${PACKAGE_NAME}")
-set(PACKAGE_VERSION "${PROJECT_VERSION}")
+set(PACKAGE_NAME ${PROJECT_NAME})
+set(PACKAGE_TARNAME ${PACKAGE_NAME})
+set(PACKAGE_VERSION ${PROJECT_VERSION})
 set(PACKAGE_STRING "${PACKAGE_NAME} ${PACKAGE_VERSION}")
 set(PACKAGE_BUGREPORT "jy38@zips.uakron.edu")
 set(PACKAGE_URL "https://github.com/Jenny-fa/UAkron-3460-477")
@@ -52,9 +52,9 @@ target_link_libraries(convolution ${JPEG_LIBRARIES})
 configure_file(config.hpp.in config.hpp)
 
 # Add 'check' target.
-if(NOT TARGET check)
-	add_custom_target(check COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target test)
-endif()
+# if(NOT TARGET check)
+# 	add_custom_target(check COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target test)
+# endif()
 
 # Add subdirectories.
 # add_subdirectory(test EXCLUDE_FROM_ALL)

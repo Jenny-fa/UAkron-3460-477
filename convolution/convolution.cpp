@@ -16,11 +16,12 @@
 #include <future>
 #include <iostream>
 
-#include <boost/mpl/vector.hpp>
 #include <boost/gil/extension/io/jpeg_io.hpp>
 #include <boost/gil/extension/numeric/kernel.hpp>
 #include <boost/gil/extension/numeric/convolve.hpp>
 
+// A convenience binary function wrapper for boost::gil::convolve_rows_fixed()
+// and boost::gil::convolve_cols_fixed().
 template<class PixelAccum, class Kernel>
 struct convolve_fixed_fn : boost::gil::binary_operation_obj<convolve_fixed_fn<PixelAccum, Kernel>> {
 	convolve_fixed_fn(const Kernel& kernel, boost::gil::convolve_boundary_option option) : kernel(kernel), option(option) {}
@@ -107,10 +108,10 @@ int main(int argc, char* argv[]) {
 		dst_slices.push_back(boost::gil::subimage_view(image_view, offset, size));
 	}
 
-	// Perform the convolution operations on each slice.
+	// Perform the convolution operation on each slice.
 	for (std::size_t i = 0; i < thread_count; i++) {
 		convolve_futures[i] = std::async(std::launch::async,
-		                                 convolve_fixed_fn<boost::gil::rgb32f_pixel_t, boost::gil::kernel_1d_fixed<double, 9>>(kernel, boost::gil::convolve_option_extend_constant),
+		                                 convolve_fixed_fn<boost::gil::rgb32f_pixel_t, decltype(kernel)>(kernel, boost::gil::convolve_option_extend_constant),
 		                                 src_slices[i],
 		                                 dst_slices[i]);
 	}
