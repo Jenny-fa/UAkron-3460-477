@@ -11,6 +11,7 @@
 #include "config.hpp"
 
 #include <cinttypes>
+#include <cmath>
 #include <cstdlib>
 #include <algorithm>
 #include <future>

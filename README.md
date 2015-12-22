@@ -14,3 +14,5 @@ not guaranteed.
 2. prime-numbers
 3. convolution
 4. parallel-sort
+5. web-server
+6. distributed-prime-numbers
