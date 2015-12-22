@@ -77,6 +77,13 @@ int main(int argc, char* argv[]) {
 	if (thread_count == 0)
 		thread_count = std::min(PTRDIFF_C(CPU_COUNT), image.height());
 
+	if (thread_count > image.height()) {
+		std::cerr << PACKAGE_NAME
+		          << ": The number of threads must not exceed the height of the image."
+		          << std::endl;
+		return 1;
+	}
+
 	const boost::gil::rgb8_view_t image_view = boost::gil::view(image);
 	const boost::gil::rgb8c_view_t const_image_view = boost::gil::const_view(image);
 
