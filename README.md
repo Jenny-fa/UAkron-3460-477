@@ -13,3 +13,4 @@ not guaranteed.
 1. hello-world
 2. prime-numbers
 3. convolution
+4. parallel-sort

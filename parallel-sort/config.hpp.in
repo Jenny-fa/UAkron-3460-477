@@ -1,0 +1,51 @@
+/* config.hpp. Generated from config.hpp.in by cmake. */
+
+#ifndef CONFIG_HPP
+#define CONFIG_HPP
+
+/* Name of package. */
+#define PACKAGE "@PACKAGE_NAME@"
+
+/* Define to the full name of this package. */
+#define PACKAGE_NAME "@PACKAGE_NAME@"
+
+/* Define to the one symbol short name of this package. */
+#define PACKAGE_TARNAME "@PACKAGE_TARNAME@"
+
+/* Define to the version of this package. */
+#define PACKAGE_VERSION "@PACKAGE_VERSION@"
+
+/* Define to the full name and version of this package. */
+#define PACKAGE_STRING "@PACKAGE_STRING@"
+
+/* Define to the address where bug reports for this package should be sent. */
+#define PACKAGE_BUGREPORT "@PACKAGE_BUGREPORT@"
+
+/* Define to the home page for this package. */
+#define PACKAGE_URL "@PACKAGE_URL@"
+
+/* Version number of package. */
+#define VERSION "@PACKAGE_VERSION@"
+
+/* Define to the number of available CPUs. */
+#define CPU_COUNT @CPU_COUNT@
+
+/* The size of 'long', as computed by sizeof. */
+@SIZEOF_LONG_CODE@
+
+/* The size of 'long long', as computed by sizeof. */
+@SIZEOF_LONG_LONG_CODE@
+
+/* The size of 'size_t', as computed by sizeof. */
+@SIZEOF_SIZE_T_CODE@
+
+/* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
+   'size_t'. */
+#define SIZE_T_SUFFIX @SIZE_T_SUFFIX@
+
+/* Function macro for a 'size_t' integer constant expression. */
+#define SIZE_C(x) XCONCAT(x, SIZE_T_SUFFIX)
+#define XCONCAT(a, b) CONCAT(a, b)
+#define CONCAT(a, b) a ## b
+
+#endif // CONFIG_HPP
