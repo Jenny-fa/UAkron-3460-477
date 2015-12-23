@@ -100,11 +100,9 @@ int main(int argc, char* argv[]) {
 	std::vector<std::size_t> range_sizes(process_count);
 	std::vector<std::uintmax_t> range_offsets(process_count);
 
-#define LOG_EXPR(x) std::cerr << #x << " = " << (x) << std::endl
-
 	try {
 		// Create a new shared memory segment.
-		const std::size_t segment_size = align<kAlignment>(process_count * sizeof(shm_vector<bool>)) + align<kAlignment>(max_prime);
+		const std::size_t segment_size = process_count * align<kAlignment>((sizeof(shm_vector<bool>) + (range_div.quot + range_div.rem)));
 
 #if !defined(NDEBUG) && defined(VERBOSE)
 		std::cerr << "Shared memory segment size: " << segment_size << std::endl;
